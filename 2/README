@@ -1,0 +1,72 @@
+Name: Mitchell Sawatzky
+UCID: 10146721
+Class: CPSC 319 W16 L01 T03
+TA: Juan Carlos Fuentes Carranza
+
+All Java programs tested on a Darwin x86 system running OSX 10.10.2
+
+Java versions:
+    $ java -version
+    java version "1.8.0_60-ea"
+    Java(TM) SE Runtime Environment (build 1.8.0_60-ea-b06)
+    Java HotSpot(TM) 64-Bit Server VM (build 25.60-b06, mixed mode)
+
+    $ javac -version
+    javac 1.8.0_60-ea
+
+Choice of Linked List:
+    I chose a Singly Linked List to implement the polynomial, as backtracking
+    or circular iteration was not needed and simpler is usually better. The PLL
+    (polynomial linked list) I designed also implements a few of the constraints
+    in the assignment such as no negative exponents.
+
+High Level description of Polynomial.add:
+    Polynomial.add calls Polynomial.arithmetic (since there is a high degree of code sharing between add and subtract).
+    Polynomial.arithmetic retrieves one node from each Polynomial at a
+    time, and compares their exponents.
+    If the exponents are the same, addition is preformed on their coefficients and a new node is retrieved from both polynomials.
+    If they are different, the lower exponent term is added to the result and a new node is retrieved only from that polynomial.
+    Once one of the polynomials is out of nodes, all of the remaining nodes in the other polynomial are appended onto the result.
+
+Polynomial.add complexity:
+    Let A = length of polynomial A, B = length of polynomial B
+    The worst case occurs when A=B, and all the exponents shared between both polynomials are different.
+    This causes the algorithm to retrieve a new node at every iteration, and never reach the "append the rest of the polynomial to
+    the result" case.
+
+    Operations in the worst case
+    A       B       Node Operations     Comparisons
+    0       0       2                   3
+    1       1       4                   9
+    2       2       6                   15
+    3       3       8                   21
+
+    In the worst case, node operations are related to the size of both polynomials, N by (2 + 2N).
+    In Big-O notation, this makes the algorithm O(N) for node operations in worst case.
+
+    In the worst case, node comparisons are related to the size of both polynomials, N by (6N + 3).
+    In Big-O notation, this makes the algorithm O(N) for node comparisons in worst case.
+
+    In the best case, Polynomial A is added to a polynomial of length 0.
+
+    Operations in the best case
+    A       B       Node Operations     Comparisons
+    0       0       2                   3
+    1       0       3                   9
+    2       0       4                   10
+    3       0       5                   11
+
+    In the best case, node operations are related to the size of the larger polynomial, N by (2 + N).
+    In Big-O notation, this makes the algorithm O(N) for node operations in the best case.
+
+    In the best case, node comparisons are related to the size of the larger polynomial, N by (8 + N).
+    In Big-O notation, this makes the algorithm O(N) for node comparisons in the best case.
+
+    Since the average case muse fall between the best case and the worst case, it is O(N) as well.
+
+    Summary:
+
+                    Operations      Comparisons
+    Best Case:         O(N)             O(N)
+    Average Case:      O(N)             O(N)
+    Worst Case:        O(N)             O(N)

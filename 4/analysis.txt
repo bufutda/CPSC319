@@ -1,0 +1,68 @@
+Graph of G = (V, E), (V=num vertices, E=num edges)
+
+Graph data structure summary (AdjacencyList.java)
+    Each vertex is decremented by one and assigned as an index in an array of all
+    vertices. Each array element is an ArrayLinkedList (ArrayLinkedList.java) that contains all the
+    adjacencies (Adjacency.java) of the parent vertex.
+
+Complexity Analysis of AdjacencyList structure:
+    Memory:
+        Array scales with number of vertices: O(V)
+        Linked Lists scale with number of edges: O(E)
+
+        Memory scales wrt O(V+E)
+
+Complexity Analysis of Queue:
+    Memory:
+        Queue is always the same length: O(N)
+    Enqueue:
+        Queue always appends to the back: O(1)
+    Dequeue:
+        Queue always dequeues from the front: O(1)
+
+Complexity Analysis of PQueue:
+    Memory:
+        Queue is always the same length: O(N)
+    Pop:
+        Always must search the entire queue: O(N)
+    Peek:
+        Always must search the entire queue: O(N)
+    Push:
+        Must search until it finds a space:
+            Best case (empty queue): O(1)
+            Worst case (full queue): O(N)
+            Average: O(N)
+    Del:
+        Must search until it finds the element:
+            Best case (first element): O(1)
+            Worst case (element isn't in the queue): O(N)
+            Average case: O(N)
+
+Complexity Analysis of BFS:
+    Memory:
+        Allocate Queue with length V -> O(V)
+        Allocate visited array with length V -> O(V)
+        Allocate reverse array with length V -> O(V)
+        Overall: O(3V) = O(V)
+    Time:
+        Set visited to -2: V times -> O(V)
+        While loop runs until destination is reached
+            Worst case: V times -> O(V)
+            Average case: O(V)
+        Inside while (average): O(V+E)
+        Answer reversal:
+            O(path length)
+            Worst case: O(V)
+        Overall: O(V+E)
+
+Complexity Analysis of dij:
+    Memory:
+        Allocate PQueue of length V -> O(V)
+        Allocate reverse array of length V -> O(V)
+        Overall: O(2V) = O(V)
+    Time:
+        Set distance to Integer.MAX_VALUE V times -> O(V)
+        While loop runs an average of V times -> O(V)
+        Children distance comparisons -> O(E)
+        Answer reversal worst case -> O(V)
+        Overall: O(V+E)
